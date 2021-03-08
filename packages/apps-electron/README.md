@@ -1,16 +1,10 @@
-# @polkadot/apps-electron
+# Nuchain Desktop App
 
-Desktop Polkadot apps client for Windows, Mac and Linux. 
-
-## Installation
-
-[Download here](https://github.com/polkadot-js/apps/releases/latest) latest versions for Windows, Mac and Linux.
+Desktop Nuchain apps client for Windows, Mac and Linux built using Electron.
 
 ## Development and testing
 
 Contributions are welcome!
-
-Follow steps described [here](https://github.com/polkadot-js/apps#development) to setup the project.
 
 * Run `yarn start:electron` to start the app in development mode. You will possibly see the `Not Found / 404` message. It's ok, just wait for the build to finish and refresh pressing `Ctrl+R`.
 * Run `yarn test` to run tests

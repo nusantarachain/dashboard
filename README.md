@@ -1,6 +1,6 @@
 # Nuchain Dashboard
 
-Customized version of [Polkadot-JS Apps](https://github.com/polkadot-js/apps) for Nuchain network.
+This Nuchain Dashboard based on [Polkadot-JS Apps](https://github.com/polkadot-js/apps).
 
-Live on [Nuchain Dashboard](https://dashboard.nuchain.network).
+You can check it online at [Nuchain Dashboard](https://dashboard.nuchain.network).
 
