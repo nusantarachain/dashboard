@@ -173,7 +173,7 @@ export default createGlobalStyle<Props & ThemeProps>(({ theme, uiHighlight }: Pr
       }
 
       .ui--Icon {
-        background: transparent;
+        /*background: transparent;*/
         color: ${getHighlight(uiHighlight)};
       }
     }
