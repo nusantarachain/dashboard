@@ -18,7 +18,7 @@ function Amount ({ className = '', defaultValue: { value }, isDisabled, isError,
     () => isDisabled
       ? value instanceof ClassOf(registry, 'AccountIndex')
         ? value.toString()
-        : (value instanceof Option ? (value.isSome ? formatNumber(value.unwrapOrDefault() as number) : "") : "")
+        : (value instanceof Option ? (value.isSome ? formatNumber(value.unwrapOrDefault() as number) : "") : value)
       : bnToBn((value as number) || 0).toString(),
     [isDisabled, registry, value]
   );
