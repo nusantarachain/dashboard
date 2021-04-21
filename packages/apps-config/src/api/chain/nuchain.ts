@@ -19,13 +19,15 @@ export default {
       "name": "Vec<u8>",
       "description": "Vec<u8>",
       "org_id": "AccountId",
-      "signer_name": "Option<Vec<u8>>"
+      "signer_name": "Vec<u8>"
   },
   "CertProof": {
       "cert_id": "CertId",
-      "human_name": "Vec<u8>",
+      "human_id": "Vec<u8>",
+      "recipient": "Vec<u8>",
       "time": "Moment",
       "expired": "Moment",
-      "revoked": "bool"
+      "revoked": "bool",
+      "additional_data": "Option<Vec<u8>>"
   }
 };
