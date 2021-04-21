@@ -16,7 +16,7 @@ import { formatBalance, isFunction } from '@polkadot/util';
 import { useTranslation } from './translate';
 
 interface Props {
-  accountId: string | null;
+  accountId?: string | null;
   className?: string;
   extrinsic?: SubmittableExtrinsic | null;
   isSendable: boolean;
@@ -49,11 +49,6 @@ function PaymentInfo ({ accountId, className = '', extrinsic }: Props): React.Re
     return null;
   }
 
-  const isFeeError = api.consts.balances && !api.tx.balances?.transfer.is(extrinsic) && balances?.accountId.eq(accountId) && (
-    balances.availableBalance.lte(dispatchInfo.partialFee) ||
-    balances.freeBalance.sub(dispatchInfo.partialFee).lte(api.consts.balances.existentialDeposit)
-  );
-
   return (
     <>
       <Expander
@@ -64,7 +59,7 @@ function PaymentInfo ({ accountId, className = '', extrinsic }: Props): React.Re
           </Trans>
         }
       />
-      {isFeeError && (
+      {api.consts.balances && !api.tx.balances?.transfer.is(extrinsic) && balances?.accountId.eq(accountId) && balances.availableBalance.sub(dispatchInfo.partialFee).lte(api.consts.balances.existentialDeposit) && (
         <MarkWarning content={t<string>('The account does not have enough free funds (excluding locked/bonded/reserved) available to cover the transaction fees without dropping the balance below the account existential amount.')} />
       )}
     </>

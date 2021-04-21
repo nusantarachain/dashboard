@@ -361,7 +361,6 @@ function TxSigned ({ className, currentItem, requestAddress }: Props): React.Rea
             : (
               <>
                 <Transaction
-                  accountId={senderInfo.signAddress}
                   currentItem={currentItem}
                   onError={toggleRenderError}
                 />

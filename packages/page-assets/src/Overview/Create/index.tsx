@@ -6,7 +6,8 @@ import type { AssetId } from '@polkadot/types/interfaces';
 import React from 'react';
 
 import { Button } from '@polkadot/react-components';
-import { useAccounts, useToggle } from '@polkadot/react-hooks';
+import { useAccounts, useApi, useToggle } from '@polkadot/react-hooks';
+import { isFunction } from '@polkadot/util';
 
 import { useTranslation } from '../../translate';
 import Create from './Create';
@@ -18,6 +19,7 @@ interface Props {
 
 function CreateButton ({ assetIds, className }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
+  const { api } = useApi();
   const { hasAccounts } = useAccounts();
   const [isOpen, toggleOpen] = useToggle();
 
@@ -25,7 +27,7 @@ function CreateButton ({ assetIds, className }: Props): React.ReactElement<Props
     <>
       <Button
         icon='plus'
-        isDisabled={!assetIds || !hasAccounts}
+        isDisabled={!assetIds || !hasAccounts || !isFunction(api.tx.utility.batchAll)}
         label={t<string>('Create')}
         onClick={toggleOpen}
       />

@@ -139,14 +139,6 @@ export function createTesting (t: TFunction): LinkOption[] {
       }
     },
     {
-      info: 'rococoGalital',
-      paraId: 1230,
-      text: t('rpc.rococo.galital', 'Galital PC2', { ns: 'apps-config' }),
-      providers: {
-        StarkleyTech: 'wss://galital-rpc-testnet.starkleytech.com'
-      }
-    },
-    {
       info: 'galois',
       text: t('rpc.galois', 'Galois', { ns: 'apps-config' }),
       providers: {
@@ -194,9 +186,9 @@ export function createTesting (t: TFunction): LinkOption[] {
     },
     {
       info: 'phala',
-      text: t('rpc.phala', 'Phala PoC-4', { ns: 'apps-config' }),
+      text: t('rpc.phala', 'Phala PoC-3', { ns: 'apps-config' }),
       providers: {
-        'Phala Network': 'wss://poc4.phala.network/ws'
+        'Phala Network': 'wss://poc3a.phala.network/ws'
       }
     },
     {
@@ -310,7 +302,7 @@ export function createTesting (t: TFunction): LinkOption[] {
       info: 'mybank',
       text: t('rpc.mybank', 'mybank.network', { ns: 'apps-config' }),
       providers: {
-        MYBANK: 'wss://mybank.network/substrate'
+        MYBANK: 'wss://app.mybank.network/substrate'
       }
     },
     {
@@ -322,10 +314,10 @@ export function createTesting (t: TFunction): LinkOption[] {
     },
     {
       info: 'nftmart',
-      text: t('rpc.nftmart', 'NFTMart', { ns: 'apps-config' }),
+      text: t('rpc.nftmart', 'Nftmart', { ns: 'apps-config' }),
       providers: {
-        NFTMartDev: 'wss://dev-ws.nftmart.io',
-        NFTMartStaging: 'wss://staging-ws.nftmart.io'
+        NftmartDev: 'ws://8.136.111.191:9944',
+        NftmartStaging: 'ws://82.157.37.77:9944'
       }
     }
   ]);

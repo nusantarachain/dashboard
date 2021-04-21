@@ -19,7 +19,7 @@ export default {
     Kulupu: 'kulupu',
     Kusama: 'kusama',
     'Laminar Turbulence TC2': 'laminar-testnet',
-    'Phala PoC-4': 'phala',
+    'Phala PoC-3': 'phala',
     Plasm: 'plasm',
     Polkadot: 'polkadot',
     Rococo: 'rococo',

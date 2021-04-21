@@ -8,16 +8,17 @@ import React, { useCallback, useMemo } from 'react';
 
 import { Input, InputNumber } from '@polkadot/react-components';
 import { ClassOf } from '@polkadot/types/create';
+import { Option } from '@polkadot/types';
 import { bnToBn, formatNumber, isUndefined } from '@polkadot/util';
 
 import Bare from './Bare';
 
 function Amount ({ className = '', defaultValue: { value }, isDisabled, isError, label, onChange, onEnter, registry, type, withLabel }: Props): React.ReactElement<Props> {
-  const defaultValue = useMemo(
+  const defaultValue: string = useMemo(
     () => isDisabled
       ? value instanceof ClassOf(registry, 'AccountIndex')
         ? value.toString()
-        : formatNumber(value as number)
+        : (value instanceof Option ? (value.isSome ? formatNumber(value.unwrapOrDefault() as number) : "") : value as string)
       : bnToBn((value as number) || 0).toString(),
     [isDisabled, registry, value]
   );
