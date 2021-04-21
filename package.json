@@ -1,8 +1,8 @@
 {
-  "name": "polkadot-apps",
-  "repository": "https://github.com/polkadot-js/apps",
+  "name": "nuchain-dashboard",
+  "repository": "https://github.com/nusantarachain/dashboard",
   "main": "packages/apps-electron/build/electron.js",
-  "description": "An Apps portal into the Polkadot network",
+  "description": "An Apps portal into the Nuchain network",
   "author": "Jaco Greeff <jacogr@gmail.com>",
   "version": "0.87.2-21",
   "license": "Apache-2",
