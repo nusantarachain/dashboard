@@ -49,25 +49,19 @@ export default {
     "TrackingEventIndex": "u128",
     "DeviceId": "Identifier",
     "Year": "u32",
-    "TrackingStatus": {
-        "_enum": [
-            "Pending",
-            "InTransit",
-            "Delivered"
-        ]
-    },
+    "TrackingStatus": "Vec<u8>",
     "Track": {
         "id": "TrackingId",
         "owner": "AccountId",
         "status": "TrackingStatus",
         "products": "Vec<ProductId>",
         "registered": "Moment",
-        "delivered": "Option<Moment>"
+        "updated": "Option<Moment>"
     },
     "TrackingEventType": {
         "_enum": [
             "TrackingRegistration",
-            "TrackingPickup",
+            "TrackingUpdateStatus",
             "TrackingScan",
             "TrackingDeliver"
         ]
@@ -77,6 +71,7 @@ export default {
         "shipment_id": "TrackingId",
         "location": "Option<ReadPoint>",
         "readings": "Vec<Reading<Moment>>",
+	"status": "TrackingStatus",
         "timestamp": "Moment"
     },
     "ReadPoint": {
