@@ -9,7 +9,8 @@ export default {
     admin: "AccountId",
     website: "Vec<u8>",
     email: "Vec<u8>",
-    suspended: "bool"
+    suspended: "bool",
+    props: "Option<Vec<Property>>"
   },
   CertId: "[u8; 32]",
   IssuedId: "Vec<u8>",
@@ -17,16 +18,16 @@ export default {
     name: "Vec<u8>",
     description: "Vec<u8>",
     org_id: "AccountId",
-    signer_name: "Vec<u8>"
+    signer_name: "Option<Text>"
   },
   CertProof: {
     cert_id: "CertId",
     human_id: "Vec<u8>",
     recipient: "Vec<u8>",
     time: "Moment",
-    expired: "Moment",
+    expired: "Option<Moment>",
     revoked: "bool",
-    additional_data: "Option<Vec<u8>>"
+    props: "Option<Vec<Property>>"
   },
   PropName: "Vec<u8>",
   PropValue: "Vec<u8>",
@@ -56,7 +57,7 @@ export default {
     registered: "Moment",
     updated: "Option<Moment>",
     parent_id: "TrackingId",
-    props: "Vec<Property>"
+    props: "Option<Vec<Property>>"
   },
   TrackingEventType: {
     _enum: ["TrackingRegistration", "TrackingUpdateStatus", "TrackingScan", "TrackingDeliver"]
