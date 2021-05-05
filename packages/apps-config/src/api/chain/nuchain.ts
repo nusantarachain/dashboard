@@ -68,7 +68,8 @@ export default {
     location: "Option<ReadPoint>",
     readings: "Vec<Reading<Moment>>",
     status: "TrackingStatus",
-    timestamp: "Moment"
+    timestamp: "Moment",
+    props: "Option<Vec<Property>>"
   },
   ReadPoint: {
     latitude: "Decimal",
