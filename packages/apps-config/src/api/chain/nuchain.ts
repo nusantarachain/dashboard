@@ -2,6 +2,12 @@ export default {
   Address: "MultiAddress",
   LookupSource: "MultiAddress",
   OrgId: "AccountId",
+  PropName: "Vec<u8>",
+  PropValue: "Vec<u8>",
+  Property: {
+    name: "PropName",
+    value: "PropValue"
+  },
   Organization: {
     id: "AccountId",
     name: "Vec<u8>",
@@ -13,7 +19,7 @@ export default {
     props: "Option<Vec<Property>>"
   },
   CertId: "[u8; 32]",
-  IssuedId: "Vec<u8>",
+  IssuedId: "[u8; 11]",
   CertDetail: {
     name: "Vec<u8>",
     description: "Vec<u8>",
@@ -28,12 +34,6 @@ export default {
     expired: "Option<Moment>",
     revoked: "bool",
     props: "Option<Vec<Property>>"
-  },
-  PropName: "Vec<u8>",
-  PropValue: "Vec<u8>",
-  Property: {
-    name: "PropName",
-    value: "PropValue"
   },
   ProductId: "Vec<u8>",
   Product: {
