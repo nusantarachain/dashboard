@@ -1,6 +1,7 @@
 export default {
   Address: "MultiAddress",
   LookupSource: "MultiAddress",
+  AccountInfo: "AccountInfoWithDualRefCount",
   OrgId: "AccountId",
   PropName: "Vec<u8>",
   PropValue: "Vec<u8>",
