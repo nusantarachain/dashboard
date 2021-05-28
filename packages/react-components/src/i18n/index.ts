@@ -44,6 +44,7 @@ i18next
       'apps-electron',
       'apps-routing',
       'app-accounts',
+      'app-organizations',
       'app-claims',
       'app-contracts',
       'app-council',

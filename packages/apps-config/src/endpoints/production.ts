@@ -31,6 +31,6 @@ export function createProduction (t: TFunction): LinkOption[] {
       providers: {
         'Rantai Nusantara': 'wss://testnet.nuchain.riset.tech'
       }
-    },
+    }
   ]);
 }

@@ -5,7 +5,7 @@ import Nuchain from './nuchain';
 
 // alphabetical, based on the actual displayed name
 export default {
-  'Nuchain': Nuchain,
+  Nuchain: Nuchain,
   'Nuchain Testnet': Nuchain,
-  'Development': Nuchain,
+  Development: Nuchain
 };

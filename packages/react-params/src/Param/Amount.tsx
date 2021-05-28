@@ -7,8 +7,8 @@ import BN from 'bn.js';
 import React, { useCallback, useMemo } from 'react';
 
 import { Input, InputNumber } from '@polkadot/react-components';
-import { ClassOf } from '@polkadot/types/create';
 import { Option } from '@polkadot/types';
+import { ClassOf } from '@polkadot/types/create';
 import { bnToBn, formatNumber, isUndefined } from '@polkadot/util';
 
 import Bare from './Bare';
@@ -18,7 +18,7 @@ function Amount ({ className = '', defaultValue: { value }, isDisabled, isError,
     () => isDisabled
       ? value instanceof ClassOf(registry, 'AccountIndex')
         ? value.toString()
-        : (value instanceof Option ? (value.isSome ? formatNumber(value.unwrapOrDefault() as number) : "") : value as string)
+        : (value instanceof Option ? (value.isSome ? formatNumber(value.unwrapOrDefault() as number) : '') : value as string)
       : bnToBn((value as number) || 0).toString(),
     [isDisabled, registry, value]
   );

@@ -1353,6 +1353,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.14.0":
+  version: 7.14.0
+  resolution: "@babel/runtime@npm:7.14.0"
+  dependencies:
+    regenerator-runtime: ^0.13.4
+  checksum: ab6653f2f8ecdaebf36674894cef458a9d4f881dc007fdcd50a8261f5c6d9731e03fda2c17e32ecf0e6c779d69eb6cf49d68a48c780aaf07d5b572e8b7ef0508
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.12.13, @babel/template@npm:^7.3.3":
   version: 7.12.13
   resolution: "@babel/template@npm:7.12.13"
@@ -2306,6 +2315,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@polkadot/app-organizations@workspace:packages/page-organizations":
+  version: 0.0.0-use.local
+  resolution: "@polkadot/app-organizations@workspace:packages/page-organizations"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+    "@polkadot/phishing": ^0.6.93
+    "@polkadot/react-components": ^0.87.2-21
+    "@polkadot/test-support": 0.87.2-21
+    detect-browser: ^5.2.0
+    file-saver: ^2.0.5
+  languageName: unknown
+  linkType: soft
+
 "@polkadot/app-parachains@workspace:packages/page-parachains":
   version: 0.0.0-use.local
   resolution: "@polkadot/app-parachains@workspace:packages/page-parachains"
@@ -2720,7 +2742,7 @@ __metadata:
     "@polkadot/keyring": ^6.1.2-3
     "@polkadot/react-api": ^0.87.2-21
     "@polkadot/react-identicon": ^0.73.2-0
-    "@polkadot/react-qr": ^0.73.2-0
+    "@polkadot/react-qr": ../react-qr
     "@polkadot/react-query": ^0.87.2-21
     "@polkadot/ui-keyring": ^0.73.2-0
     "@polkadot/ui-settings": ^0.73.2-0
@@ -2796,25 +2818,46 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@polkadot/react-qr@npm:^0.73.2-0":
-  version: 0.73.2-0
-  resolution: "@polkadot/react-qr@npm:0.73.2-0"
+"@polkadot/react-qr@file:../react-qr::locator=%40polkadot%2Freact-components%40workspace%3Apackages%2Freact-components":
+  version: 0.77.2-0
+  resolution: "@polkadot/react-qr@file:../react-qr#../react-qr::hash=09154b&locator=%40polkadot%2Freact-components%40workspace%3Apackages%2Freact-components"
   dependencies:
-    "@babel/runtime": ^7.13.10
-    "@polkadot/util": ^6.1.2-3
-    "@polkadot/util-crypto": ^6.1.2-3
+    "@babel/runtime": ^7.14.0
+    "@polkadot/util": ^6.5.2-0
+    "@polkadot/util-crypto": ^6.5.2-0
     qrcode-generator: ^1.4.4
     react-qr-reader: ^2.2.1
-    styled-components: ^5.2.3
+    styled-components: ^5.3.0
   peerDependencies:
     "@polkadot/util": "*"
     "@polkadot/util-crypto": "*"
     react: "*"
     react-dom: "*"
     styled-components: "*"
-  checksum: b17c72cd8d4b414d41ea841a55eae40704d4c28a0e8f341fecae63b4ff91ac7d10955576cd5964f712cf4c758dea4cc1330e34d07ec291b3ce2c9bfa3ff7dddf
+  checksum: 566663375592fcc90c8c3958843fb7925a1823dc323c257665628f4be5822301a47b7de65e47190b0dbc4ca7406a87a64495be677faeb891ad4122622609a271
   languageName: node
   linkType: hard
+
+"@polkadot/react-qr@workspace:packages/react-qr":
+  version: 0.0.0-use.local
+  resolution: "@polkadot/react-qr@workspace:packages/react-qr"
+  dependencies:
+    "@babel/runtime": ^7.14.0
+    "@polkadot/util": ^6.5.2-0
+    "@polkadot/util-crypto": ^6.5.2-0
+    "@types/react-qr-reader": ^2.1.3
+    "@types/styled-components": ^5.1.9
+    qrcode-generator: ^1.4.4
+    react-qr-reader: ^2.2.1
+    styled-components: ^5.3.0
+  peerDependencies:
+    "@polkadot/util": "*"
+    "@polkadot/util-crypto": "*"
+    react: "*"
+    react-dom: "*"
+    styled-components: "*"
+  languageName: unknown
+  linkType: soft
 
 "@polkadot/react-query@^0.87.2-21, @polkadot/react-query@workspace:packages/react-query":
   version: 0.0.0-use.local
@@ -3821,6 +3864,15 @@ __metadata:
   dependencies:
     "@types/react": "*"
   checksum: 9314c91a985f153591e1e74aef3d63d8b22e098069773f32745bf0733740a49802731761a46da8788a7d3dd2c21346036f12c2c24627630e5a6210b120a650e6
+  languageName: node
+  linkType: hard
+
+"@types/react-qr-reader@npm:^2.1.3":
+  version: 2.1.3
+  resolution: "@types/react-qr-reader@npm:2.1.3"
+  dependencies:
+    "@types/react": "*"
+  checksum: 1e15b060893b8d437462c624e124e8bb29daeba8d5bec5c1325ef246bc89c3b147ac9d7560000d28db048ee290f410392eb8fa107e2b171e1057f63b4feabb8a
   languageName: node
   linkType: hard
 

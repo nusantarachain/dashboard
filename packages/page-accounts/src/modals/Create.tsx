@@ -333,7 +333,8 @@ function Create ({ className = '', onClose, onStatusChange, seed: propsSeed, typ
                       : t<string>('seed (hex or string)')
               }
               onChange={_onChangeSeed}
-              seed={seed}
+              value={seed}
+              withDropdown
               withLabel
             >
               <CopyButton

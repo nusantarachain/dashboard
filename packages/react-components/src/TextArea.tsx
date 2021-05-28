@@ -14,11 +14,12 @@ interface Props {
   isReadOnly?: boolean;
   label?: React.ReactNode;
   onChange?: (arg: string) => void;
-  seed?: string;
+  value?: string;
   withLabel?: boolean;
+  withDropdown?: boolean;
 }
 
-function TextArea ({ children, className, help, isError, isReadOnly, label, onChange, seed, withLabel }: Props): React.ReactElement<Props> {
+function TextArea ({ children, className, help, isError, isReadOnly, label, onChange, value, withLabel, withDropdown }: Props): React.ReactElement<Props> {
   const _onChange = useCallback(
     ({ target: { value } }: React.ChangeEvent<HTMLTextAreaElement>): void => {
       onChange && onChange(value);
@@ -33,7 +34,7 @@ function TextArea ({ children, className, help, isError, isReadOnly, label, onCh
       label={label}
       withLabel={withLabel}
     >
-      <div className='TextAreaWithDropdown'>
+      <div className={withDropdown ? 'TextAreaWithDropdown' : 'TextArea'}>
         <textarea
           autoCapitalize='off'
           autoCorrect='off'
@@ -43,7 +44,7 @@ function TextArea ({ children, className, help, isError, isReadOnly, label, onCh
           readOnly={isReadOnly}
           rows={2}
           spellCheck={false}
-          value={seed}
+          value={value}
         />
         {children}
       </div>
@@ -52,6 +53,35 @@ function TextArea ({ children, className, help, isError, isReadOnly, label, onCh
 }
 
 export default React.memo(styled(TextArea)`
+  .TextArea {
+    textarea {
+      border-radius: 0.25rem 0 0 0.25rem;
+      border: 1px solid #DDE1EB;
+      background: var(--bg-input);
+      box-sizing: border-box;
+      color: var(--color-text);
+      display: block;
+      outline: none;
+      padding: 1.75rem 3rem 0.75rem 1.5rem;
+      resize: none;
+      width: 100%;
+
+      &:read-only {
+        background: var(--bg-inverse);
+        box-shadow: none;
+        outline: none;
+
+        ~ .ui.buttons > .ui.selection.dropdown {
+          background: var(--bg-inverse);
+        }
+      }
+
+      &.ui-textArea-withError {
+        background: var(--bg-input-error);
+        color: var(--color-error);
+      }
+    }
+  }
   .TextAreaWithDropdown {
     display: flex;
     textarea {

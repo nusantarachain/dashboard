@@ -17,6 +17,7 @@ import explorer from './explorer';
 import extrinsics from './extrinsics';
 import gilt from './gilt';
 import js from './js';
+import organizations from './organizations';
 import parachains from './parachains';
 import poll from './poll';
 import rpc from './rpc';
@@ -33,6 +34,7 @@ import treasury from './treasury';
 export default function create (t: TFunction): Routes {
   return [
     accounts(t),
+    organizations(t),
     addresses(t),
     explorer(t),
     claims(t),
