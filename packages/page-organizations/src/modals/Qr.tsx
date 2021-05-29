@@ -101,7 +101,7 @@ function QrModal ({ className = '', onClose, onStatusChange }: Props): React.Rea
   return (
     <Modal
       className={className}
-      header={t<string>('Add account via Qr')}
+      header={t<string>('Add via Qr')}
       size='large'
     >
       <Modal.Content>

@@ -7,7 +7,7 @@ import { AddressRow, Button, Modal } from '@polkadot/react-components';
 
 import { useTranslation } from './translate';
 
-type Mode = 'account' | 'address' | 'contract' | 'code';
+type Mode = 'account' | 'address' | 'contract' | 'code' | 'org';
 
 interface Props {
   address?: string;
@@ -41,6 +41,13 @@ function getContent (mode: Mode, t: <T = string> (key: string) => T): React.Reac
           <p>{t<string>('This operation does not remove the history of the contract from the chain, nor any associated funds from its account. The forget operation only limits your access to the contract on this browser.')}</p>
         </>
       );
+    case 'org':
+      return (
+        <>
+          <p>{t<string>("You are about to remove this organization from the list.")}</p>
+          <p>{t<string>("This operation does not remove the actual object from chain, only remove from this browser memory.")}</p>
+        </>
+      );
     default:
       return null;
   }
@@ -56,6 +63,8 @@ function getHeaderText (mode: Mode, t: <T = string> (key: string) => T): string 
       return t<string>('Confirm contract removal');
     case 'code':
       return t<string>('Confirm code removal');
+    case 'org':
+      return t<string>('Confirm organization removal');
   }
 }
 
@@ -66,6 +75,7 @@ function renderContent (props: Props, t: <T = string> (key: string) => T): React
     case 'account':
     case 'address':
     case 'contract':
+    case 'org':
       return (
         <AddressRow
           isInline

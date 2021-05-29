@@ -20,15 +20,24 @@ export interface ModalProps {
   onStatusChange: (status: ActionStatus) => void;
 }
 
-export interface Delegation {
-  accountDelegated: string
-  amount: Balance
-  conviction: Conviction
-}
+// export interface Delegation {
+//   accountDelegated: string
+//   amount: Balance
+//   conviction: Conviction
+// }
 
-export interface SortedAccount {
-  account: KeyringAddress;
-  children: SortedAccount[];
-  delegation?: Delegation;
-  isFavorite: boolean;
+// export interface SortedAccount {
+//   account: KeyringAddress;
+//   children: SortedAccount[];
+//   delegation?: Delegation;
+//   isFavorite: boolean;
+// }
+
+export interface OrgStored {
+  id:string,
+  name:string;
+  description:string;
+  admin:KeyringAddress;
+  website:string;
+  email:string;
 }

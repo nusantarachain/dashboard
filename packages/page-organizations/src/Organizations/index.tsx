@@ -3,7 +3,7 @@
 
 import type { ActionStatus } from '@polkadot/react-components/Status/types';
 import type { AccountId, ProxyDefinition, ProxyType, Voting } from '@polkadot/types/interfaces';
-import type { Delegation, SortedAccount } from '../types';
+import type { OrgStored } from '../types';
 
 import BN from 'bn.js';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
@@ -18,10 +18,12 @@ import CreateModal from '../modals/Create';
 import ImportModal from '../modals/Import';
 import Qr from '../modals/Qr';
 import { useTranslation } from '../translate';
-import { sortAccounts } from '../util';
-import Account from './Account';
+// import { sortAccounts } from '../util';
+import Organization from './Organization';
 import BannerClaims from './BannerClaims';
 import BannerExtension from './BannerExtension';
+
+import store from "../store";
 
 interface Balances {
   accounts: Record<string, BN>;
@@ -29,7 +31,7 @@ interface Balances {
 }
 
 interface Sorted {
-  sortedAccounts: SortedAccount[];
+  storedOrgs: OrgStored[];
   sortedAddresses: string[];
 }
 
@@ -42,69 +44,35 @@ const STORE_FAVS = 'accounts:favorites';
 
 function Overview ({ className = '', onStatusChange }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
-  const { api } = useApi();
-  // const { allAccounts, hasAccounts } = useAccounts();
-  const { isIpfs } = useIpfs();
-  const { isLedgerEnabled } = useLedger();
   const [isCreateOpen, toggleCreate] = useToggle();
   const [isImportOpen, toggleImport] = useToggle();
-  const [isQrOpen, toggleQr] = useToggle();
   const [favorites, toggleFavorite] = useFavorites(STORE_FAVS);
   const [{ balanceTotal }, setBalances] = useState<Balances>({ accounts: {} });
   const [filterOn, setFilter] = useState<string>('');
-  const [sortedAccountsWithDelegation, setSortedAccountsWithDelegation] = useState<SortedAccount[] | undefined>();
-  const [{ sortedAccounts, sortedAddresses }, setSorted] = useState<Sorted>({ sortedAccounts: [], sortedAddresses: [] });
-  const delegations = useCall<Voting[]>(api.query.democracy?.votingOf?.multi, [sortedAddresses]);
-  const proxies = useCall<[ProxyDefinition[], BN][]>(api.query.proxy?.proxies.multi, [sortedAddresses], {
-    transform: (result: [([AccountId, ProxyType] | ProxyDefinition)[], BN][]): [ProxyDefinition[], BN][] =>
-      api.tx.proxy.addProxy.meta.args.length === 3
-        ? result as [ProxyDefinition[], BN][]
-        : (result as [[AccountId, ProxyType][], BN][]).map(([arr, bn]): [ProxyDefinition[], BN] =>
-          [arr.map(([delegate, proxyType]): ProxyDefinition => api.createType('ProxyDefinition', { delegate, proxyType })), bn]
-        )
-  });
+  const [storedOrgs , setSorted] = useState<OrgStored[]>([]);
   const isLoading = useLoadingDelay();
 
   const headerRef = useRef([
-    [t('accounts'), 'start', 3],
-    [t('parent'), 'address media--1400'],
-    [t('type')],
-    [t('tags'), 'start'],
+    [t('organizations'), 'start', 3],
+    [t('name'), 'start'],
+    [t('description'), 'start'],
+    // [t('tags'), 'start'],
     [t('transactions'), 'media--1500'],
-    [t('balances'), 'expand'],
-    [],
+    [t('funds'), 'expand', 2],
+    // [],
     [undefined, 'media--1400']
   ]);
 
-  // useEffect((): void => {
-  //   const sortedAccounts = sortAccounts(allAccounts, favorites);
-  //   const sortedAddresses = sortedAccounts.map((a) => a.account.address);
+  useEffect((): void => {
+    const triggerUpdate = () => {
+      setSorted(store.getAllOrganizations())
+    };
 
-  //   setSorted({ sortedAccounts, sortedAddresses });
-  // }, [allAccounts, favorites]);
-
-  useEffect(() => {
-    setSortedAccountsWithDelegation(
-      sortedAccounts?.map((account, index) => {
-        let delegation: Delegation | undefined;
-
-        if (delegations && delegations[index]?.isDelegating) {
-          const { balance: amount, conviction, target } = delegations[index].asDelegating;
-
-          delegation = {
-            accountDelegated: target.toString(),
-            amount,
-            conviction
-          };
-        }
-
-        return ({
-          ...account,
-          delegation
-        });
-      })
-    );
-  }, [api, delegations, sortedAccounts]);
+    store.loadAll().then(triggerUpdate);
+    
+    store.on('new-org', triggerUpdate)
+    store.on('remove-org', triggerUpdate)
+  }, [store]);
 
   const _setBalance = useCallback(
     (account: string, balance: BN) =>
@@ -159,41 +127,37 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
           onStatusChange={onStatusChange}
         />
       )}
-      {isQrOpen && (
+      {/* {isQrOpen && (
         <Qr
           onClose={toggleQr}
           onStatusChange={onStatusChange}
         />
-      )}
+      )} */}
       <Button.Group>
         <Button
           icon='plus'
-          isDisabled={isIpfs}
-          label={t<string>('Create Organization')}
+          label={t<string>('Register')}
           onClick={toggleCreate}
         />
-        <Button
+        {/* <Button
           icon='qrcode'
           label={t<string>('Add via Qr')}
           onClick={toggleQr}
-        />
+        /> */}
       </Button.Group>
       <BannerExtension />
       <BannerClaims />
       <Table
-        empty={!isLoading && sortedAccountsWithDelegation && t<string>("You don't have any accounts. Some features are currently hidden and will only become available once you have accounts.")}
+        empty={!isLoading && storedOrgs && t<string>("No any organizations registered to your session.")}
         filter={filter}
         footer={footer}
         header={headerRef.current}
       >
-        {!isLoading && sortedAccountsWithDelegation?.map(({ account, delegation, isFavorite }, index): React.ReactNode => (
-          <Account
-            account={account}
-            delegation={delegation}
+        {!isLoading && storedOrgs?.map((org, index): React.ReactNode => (
+          <Organization
+            org={org}
             filter={filterOn}
-            isFavorite={isFavorite}
-            key={`${index}:${account.address}`}
-            proxy={proxies?.[index]}
+            key={`${index}:${org.id}`}
             setBalance={_setBalance}
             toggleFavorite={toggleFavorite}
           />

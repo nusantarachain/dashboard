@@ -22,9 +22,8 @@ import { hdLedger, hdValidatePath, keyExtractSuri, mnemonicGenerate, mnemonicVal
 
 import { useTranslation } from '../translate';
 import CreateConfirmation from './CreateConfirmation';
-import CreateSuriLedger from './CreateSuriLedger';
-import ExternalWarning from './ExternalWarning';
-import PasswordInput from './PasswordInput';
+
+import store from '../store';
 
 const ETH_DEFAULT_PATH = "m/44'/60'/0'/0/0";
 
@@ -333,7 +332,11 @@ function Create ({ className = '', onClose, onStatusChange, seed: propsSeed, typ
           console.log(eventName)
           if (eventName === "organization.OrganizationAdded"){
             const [orgId, _creatorId] = data.toHuman() as string[];
-            
+            api.query.organization.organizations(orgId).then((data: any) => {
+              const org = data.toHuman()
+              console.log("🚀 ~ file: Create.tsx ~ line 337 ~ api.query.organization.organizations ~ org", org)
+              store.save(org)
+            })
           }
         });
       }

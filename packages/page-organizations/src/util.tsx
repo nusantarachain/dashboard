@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { KeyringAddress } from '@polkadot/ui-keyring/types';
-import type { SortedAccount } from './types';
+// import type { SortedAccount } from './types';
 
 import React from 'react';
 
@@ -17,49 +17,49 @@ export function createMenuGroup (key: string, items: (React.ReactNode | false | 
     : null;
 }
 
-function expandList (mapped: SortedAccount[], entry: SortedAccount): SortedAccount[] {
-  mapped.push(entry);
+// function expandList (mapped: SortedAccount[], entry: SortedAccount): SortedAccount[] {
+//   mapped.push(entry);
 
-  entry.children.forEach((entry): void => {
-    expandList(mapped, entry);
-  });
+//   entry.children.forEach((entry): void => {
+//     expandList(mapped, entry);
+//   });
 
-  return mapped;
-}
+//   return mapped;
+// }
 
-export function sortAccounts (addresses: string[], favorites: string[]): SortedAccount[] {
-  const mapped = addresses
-    .map((address) => keyring.getAccount(address))
-    .filter((account): account is KeyringAddress => !!account)
-    .map((account): SortedAccount => ({
-      account,
-      children: [],
-      isFavorite: favorites.includes(account.address)
-    }))
-    .sort((a, b) => (a.account.meta.whenCreated || 0) - (b.account.meta.whenCreated || 0));
+// export function sortAccounts (addresses: string[], favorites: string[]): SortedAccount[] {
+//   const mapped = addresses
+//     .map((address) => keyring.getAccount(address))
+//     .filter((account): account is KeyringAddress => !!account)
+//     .map((account): SortedAccount => ({
+//       account,
+//       children: [],
+//       isFavorite: favorites.includes(account.address)
+//     }))
+//     .sort((a, b) => (a.account.meta.whenCreated || 0) - (b.account.meta.whenCreated || 0));
 
-  return mapped
-    .filter((entry): boolean => {
-      const parentAddress = entry.account.meta.parentAddress;
+//   return mapped
+//     .filter((entry): boolean => {
+//       const parentAddress = entry.account.meta.parentAddress;
 
-      if (parentAddress) {
-        const parent = mapped.find(({ account: { address } }) => address === parentAddress);
+//       if (parentAddress) {
+//         const parent = mapped.find(({ account: { address } }) => address === parentAddress);
 
-        if (parent) {
-          parent.children.push(entry);
+//         if (parent) {
+//           parent.children.push(entry);
 
-          return false;
-        }
-      }
+//           return false;
+//         }
+//       }
 
-      return true;
-    })
-    .reduce(expandList, [])
-    .sort((a, b): number =>
-      a.isFavorite === b.isFavorite
-        ? 0
-        : b.isFavorite
-          ? 1
-          : -1
-    );
-}
+//       return true;
+//     })
+//     .reduce(expandList, [])
+//     .sort((a, b): number =>
+//       a.isFavorite === b.isFavorite
+//         ? 0
+//         : b.isFavorite
+//           ? 1
+//           : -1
+//     );
+// }
