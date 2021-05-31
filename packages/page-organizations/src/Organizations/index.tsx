@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { ActionStatus } from '@polkadot/react-components/Status/types';
-import type { AccountId, ProxyDefinition, ProxyType, Voting } from '@polkadot/types/interfaces';
 import type { OrgStored } from '../types';
 
 import BN from 'bn.js';
@@ -10,29 +9,20 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import styled from 'styled-components';
 
 import { Button, Input, Table } from '@polkadot/react-components';
-import { useAccounts, useApi, useCall, useFavorites, useIpfs, useLedger, useLoadingDelay, useToggle } from '@polkadot/react-hooks';
+import { useFavorites, useLoadingDelay, useToggle } from '@polkadot/react-hooks';
 import { FormatBalance } from '@polkadot/react-query';
 import { BN_ZERO } from '@polkadot/util';
 
 import CreateModal from '../modals/Create';
 import ImportModal from '../modals/Import';
-import Qr from '../modals/Qr';
 import { useTranslation } from '../translate';
-// import { sortAccounts } from '../util';
 import Organization from './Organization';
-import BannerClaims from './BannerClaims';
-import BannerExtension from './BannerExtension';
 
 import store from "../store";
 
 interface Balances {
   accounts: Record<string, BN>;
   balanceTotal?: BN;
-}
-
-interface Sorted {
-  storedOrgs: OrgStored[];
-  sortedAddresses: string[];
 }
 
 interface Props {
@@ -127,26 +117,13 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
           onStatusChange={onStatusChange}
         />
       )}
-      {/* {isQrOpen && (
-        <Qr
-          onClose={toggleQr}
-          onStatusChange={onStatusChange}
-        />
-      )} */}
       <Button.Group>
         <Button
           icon='plus'
           label={t<string>('Register')}
           onClick={toggleCreate}
         />
-        {/* <Button
-          icon='qrcode'
-          label={t<string>('Add via Qr')}
-          onClick={toggleQr}
-        /> */}
       </Button.Group>
-      <BannerExtension />
-      <BannerClaims />
       <Table
         empty={!isLoading && storedOrgs && t<string>("No any organizations registered to your session.")}
         filter={filter}

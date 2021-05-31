@@ -197,58 +197,6 @@ function Organization ({ org: { id, name, description }, className = '', filter,
   // );
 
   const menuItems = useMemo(() => [
-    // createMenuGroup('identityGroup', [
-    //   isFunction(api.api.tx.identity?.setIdentity) && !isHardware && (
-    //     <Menu.Item
-    //       key='identityMain'
-    //       onClick={toggleIdentityMain}
-    //     >
-    //       {t('Set on-chain identity')}
-    //     </Menu.Item>
-    //   ),
-    //   isFunction(api.api.tx.identity?.setSubs) && identity?.display && !isHardware && (
-    //     <Menu.Item
-    //       key='identitySub'
-    //       onClick={toggleIdentitySub}
-    //     >
-    //       {t('Set on-chain sub-identities')}
-    //     </Menu.Item>
-    //   ),
-    //   // isFunction(api.api.tx.democracy?.unlock) && democracyUnlockTx && (
-    //   //   <Menu.Item
-    //   //     key='clearDemocracy'
-    //   //     onClick={_clearDemocracyLocks}
-    //   //   >
-    //   //     {t('Clear expired democracy locks')}
-    //   //   </Menu.Item>
-    //   // ),
-    //   isFunction(api.api.tx.vesting?.vest) && vestingVestTx && (
-    //     <Menu.Item
-    //       key='vestingVest'
-    //       onClick={_vestingVest}
-    //     >
-    //       {t('Unlock vested amount')}
-    //     </Menu.Item>
-    //   )
-    // ]),
-    // createMenuGroup('deriveGroup', [
-    //   !(isExternal || isHardware || isInjected || isMultisig) && (
-    //     <Menu.Item
-    //       key='deriveAccount'
-    //       onClick={toggleDerive}
-    //     >
-    //       {t('Derive account via derivation path')}
-    //     </Menu.Item>
-    //   ),
-    //   isHardware && (
-    //     <Menu.Item
-    //       key='showHwAddress'
-    //       onClick={_showOnHardware}
-    //     >
-    //       {t('Show address on hardware device')}
-    //     </Menu.Item>
-    //   )
-    // ]),
     createMenuGroup('backupGroup', [
       !(isExternal || isHardware || isInjected || isMultisig || isDevelopment) && (
         <Menu.Item
@@ -258,14 +206,6 @@ function Organization ({ org: { id, name, description }, className = '', filter,
           {t('Create a backup file for this account')}
         </Menu.Item>
       ),
-      // !(isExternal || isHardware || isInjected || isMultisig || isDevelopment) && (
-      //   <Menu.Item
-      //     key='changePassword'
-      //     onClick={togglePassword}
-      //   >
-      //     {t("Change this account's password")}
-      //   </Menu.Item>
-      // ),
       !(isInjected || isDevelopment) && (
         <Menu.Item
           key='forgetAccount'
@@ -275,64 +215,7 @@ function Organization ({ org: { id, name, description }, className = '', filter,
         </Menu.Item>
       )
     ]),
-    // isFunction(api.api.tx.recovery?.createRecovery) && createMenuGroup('reoveryGroup', [
-    //   !recoveryInfo && (
-    //     <Menu.Item
-    //       key='makeRecoverable'
-    //       onClick={toggleRecoverSetup}
-    //     >
-    //       {t('Make recoverable')}
-    //     </Menu.Item>
-    //   ),
-    //   <Menu.Item
-    //     key='initRecovery'
-    //     onClick={toggleRecoverAccount}
-    //   >
-    //     {t('Initiate recovery for another')}
-    //   </Menu.Item>
-    // ]),
-    // isFunction(api.api.tx.multisig?.asMulti) && isMultisig && createMenuGroup('multisigGroup', [
-    //   <Menu.Item
-    //     disabled={!multiInfos || !multiInfos.length}
-    //     key='multisigApprovals'
-    //     onClick={toggleMultisig}
-    //   >
-    //     {t('Multisig approvals')}
-    //   </Menu.Item>
-    // ]),
-    // isFunction(api.api.query.democracy?.votingOf) && delegation?.accountDelegated && createMenuGroup('undelegateGroup', [
-    //   <Menu.Item
-    //     key='changeDelegate'
-    //     onClick={toggleDelegate}
-    //   >
-    //     {t('Change democracy delegation')}
-    //   </Menu.Item>,
-    //   <Menu.Item
-    //     key='undelegate'
-    //     onClick={toggleUndelegate}
-    //   >
-    //     {t('Undelegate')}
-    //   </Menu.Item>
-    // ]),
-    // isFunction(api.api.query.democracy?.votingOf) && !delegation?.accountDelegated && createMenuGroup('delegateGroup', [
-    //   <Menu.Item
-    //     key='delegate'
-    //     onClick={toggleDelegate}
-    //   >
-    //     {t('Delegate democracy votes')}
-    //   </Menu.Item>
-    // ]),
-    // isFunction(api.api.query.proxy?.proxies) && createMenuGroup('proxyGroup', [
-    //   <Menu.Item
-    //     key='proxy-overview'
-    //     onClick={toggleProxyOverview}
-    //   >
-    //     {proxy?.[0].length
-    //       ? t('Manage proxies')
-    //       : t('Add proxy')
-    //     }
-    //   </Menu.Item>
-    // ]),
+    
     isEditable && !api.isDevelopment && createMenuGroup('genesisGroup', [
       <ChainLock
         className='accounts--network-toggle'
