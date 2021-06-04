@@ -204,7 +204,7 @@ function Api ({ children, store, url }: Props): React.ReactElement<Props> | null
     api.on('disconnected', () => setIsApiConnected(false));
     api.on('error', (error: Error) => setApiError(error.message));
     api.on('ready', (): void => {
-      const injectedPromise = web3Enable('polkadot-js/apps');
+      const injectedPromise = web3Enable('Nuchain Dashboard');
 
       injectedPromise
         .then(setExtensions)

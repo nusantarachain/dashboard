@@ -1,17 +1,16 @@
 // Copyright 2017-2021 @polkadot/app-accounts authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import type { SubmittableExtrinsic } from '@polkadot/api/types';
+// import type { SubmittableExtrinsic } from '@polkadot/api/types';
 import type { DeriveBalancesAll } from '@polkadot/api-derive/types';
 import type { ActionStatus } from '@polkadot/react-components/Status/types';
 import type { ThemeDef } from '@polkadot/react-components/types';
 
-import React, { useCallback, useContext, useMemo, useState } from 'react';
+import React, { useCallback, useContext, useMemo } from 'react';
 import styled, { ThemeContext } from 'styled-components';
 
-import { AddressInfo, AddressSmall, Badge, Button, ChainLock, Forget, Icon, LinkExternal, Menu, Popup, StatusContext } from '@polkadot/react-components';
+import { AddressInfo, AddressSmall, Badge, Button, ChainLock, Forget, Icon, LinkExternal, Menu, Popup } from '@polkadot/react-components';
 import { useAccountInfo, useApi, useCall, useToggle } from '@polkadot/react-hooks';
-import { keyring } from '@polkadot/ui-keyring';
 import { BN_ZERO, formatNumber } from '@polkadot/util';
 
 import Backup from '../modals/Backup';
@@ -23,10 +22,10 @@ import RecoverAccount from '../modals/RecoverAccount';
 import RecoverSetup from '../modals/RecoverSetup';
 import Transfer from '../modals/Transfer';
 import UndelegateModal from '../modals/Undelegate';
-import { useTranslation } from '../translate';
-import { createMenuGroup } from '../util';
-import { OrgStored } from '../types';
 import store from '../store';
+import { useTranslation } from '../translate';
+import { OrgStored } from '../types';
+import { createMenuGroup } from '../util';
 
 interface Props {
   org: OrgStored;
@@ -74,11 +73,11 @@ function calcVisible (filter: string, name: string, tags: string[]): boolean {
 //   transform: (opt: Option<RecoveryConfig>) => opt.unwrapOr(null)
 // };
 
-function Organization ({ org: { id, name, description }, className = '', filter, isFavorite, toggleFavorite }: Props): React.ReactElement<Props> | null {
+function Organization ({ className = '', filter, isFavorite, org: { description, id, name }, toggleFavorite }: Props): React.ReactElement<Props> | null {
   const { t } = useTranslation();
   const address = id;
   const { theme } = useContext<ThemeDef>(ThemeContext);
-  const { queueExtrinsic } = useContext(StatusContext);
+  // const { queueExtrinsic } = useContext(StatusContext);
   const api = useApi();
   // const { getLedger } = useLedger();
   // const bestNumber = useBestNumber();
@@ -89,7 +88,7 @@ function Organization ({ org: { id, name, description }, className = '', filter,
   // const proxyInfo = useProxies(address);
   const { flags: { isDevelopment, isEditable, isExternal, isHardware, isInjected, isMultisig }, genesisHash, identity, name: accName, onSetGenesisHash, tags } = useAccountInfo(address);
   // const [{ democracyUnlockTx }, setUnlockableIds] = useState<DemocracyUnlockable>({ democracyUnlockTx: null, ids: [] });
-  const [vestingVestTx, setVestingTx] = useState<SubmittableExtrinsic<'promise'> | null>(null);
+  // const [vestingVestTx, setVestingTx] = useState<SubmittableExtrinsic<'promise'> | null>(null);
   const [isBackupOpen, toggleBackup] = useToggle();
   const [isDeriveOpen, toggleDerive] = useToggle();
   const [isForgetOpen, toggleForget] = useToggle();
@@ -177,13 +176,13 @@ function Organization ({ org: { id, name, description }, className = '', filter,
   //   [address, democracyUnlockTx, queueExtrinsic]
   // );
 
-  const _vestingVest = useCallback(
-    () => vestingVestTx && queueExtrinsic({
-      accountId: address,
-      extrinsic: vestingVestTx
-    }),
-    [address, queueExtrinsic, vestingVestTx]
-  );
+  // const _vestingVest = useCallback(
+  //   () => vestingVestTx && queueExtrinsic({
+  //     accountId: address,
+  //     extrinsic: vestingVestTx
+  //   }),
+  //   [address, queueExtrinsic, vestingVestTx]
+  // );
 
   // const _showOnHardware = useCallback(
   //   // TODO: we should check the hardwareType from metadata here as well,
@@ -198,14 +197,14 @@ function Organization ({ org: { id, name, description }, className = '', filter,
 
   const menuItems = useMemo(() => [
     createMenuGroup('backupGroup', [
-      !(isExternal || isHardware || isInjected || isMultisig || isDevelopment) && (
-        <Menu.Item
-          key='backupJson'
-          onClick={toggleBackup}
-        >
-          {t('Create a backup file for this account')}
-        </Menu.Item>
-      ),
+      // !(isExternal || isHardware || isInjected || isMultisig || isDevelopment) && (
+      //   <Menu.Item
+      //     key='backupJson'
+      //     onClick={toggleBackup}
+      //   >
+      //     {t('Create a backup file for this account')}
+      //   </Menu.Item>
+      // ),
       !(isInjected || isDevelopment) && (
         <Menu.Item
           key='forgetAccount'
@@ -215,7 +214,7 @@ function Organization ({ org: { id, name, description }, className = '', filter,
         </Menu.Item>
       )
     ]),
-    
+
     isEditable && !api.isDevelopment && createMenuGroup('genesisGroup', [
       <ChainLock
         className='accounts--network-toggle'
@@ -225,7 +224,7 @@ function Organization ({ org: { id, name, description }, className = '', filter,
       />
     ])
   ].filter((i) => i),
-  [_vestingVest, api, genesisHash, identity, isDevelopment, isEditable, isExternal, isHardware, isInjected, isMultisig, onSetGenesisHash, t, toggleBackup, toggleDerive, toggleForget, toggleIdentityMain, toggleIdentitySub, togglePassword, toggleRecoverAccount, toggleRecoverSetup, toggleUndelegate, vestingVestTx]);
+  [api, genesisHash, identity, isDevelopment, isEditable, isExternal, isHardware, isInjected, isMultisig, onSetGenesisHash, t, toggleBackup, toggleDerive, toggleForget, toggleIdentityMain, toggleIdentitySub, togglePassword, toggleRecoverAccount, toggleRecoverSetup, toggleUndelegate]);
 
   if (!isVisible) {
     return null;
@@ -262,8 +261,8 @@ function Organization ({ org: { id, name, description }, className = '', filter,
         {isForgetOpen && (
           <Forget
             address={address}
-            mode="org"
             key='modal-forget-account'
+            mode='org'
             onClose={toggleForget}
             onForget={_onForget}
           />

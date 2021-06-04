@@ -19,7 +19,7 @@ interface Props {
   withDropdown?: boolean;
 }
 
-function TextArea ({ children, className, help, isError, isReadOnly, label, onChange, value, withLabel, withDropdown }: Props): React.ReactElement<Props> {
+function TextArea ({ children, className, help, isError, isReadOnly, label, onChange, value, withDropdown, withLabel }: Props): React.ReactElement<Props> {
   const _onChange = useCallback(
     ({ target: { value } }: React.ChangeEvent<HTMLTextAreaElement>): void => {
       onChange && onChange(value);

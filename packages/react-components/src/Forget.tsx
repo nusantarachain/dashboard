@@ -44,8 +44,8 @@ function getContent (mode: Mode, t: <T = string> (key: string) => T): React.Reac
     case 'org':
       return (
         <>
-          <p>{t<string>("You are about to remove this organization from the list.")}</p>
-          <p>{t<string>("This operation does not remove the actual object from chain, only remove from this browser memory.")}</p>
+          <p>{t<string>('You are about to remove this organization from the list.')}</p>
+          <p>{t<string>('This operation does not remove the actual object from chain, only remove from this browser memory.')}</p>
         </>
       );
     default:

@@ -5,7 +5,7 @@
   "type": "module",
   "main": "index.js",
   "sideEffects": true,
-  "repository": "github:polkadot-js/apps",
+  "repository": "github:nusantarachain/dashboard",
   "dependencies": {
     "@acala-network/type-definitions": "^0.7.2-4",
     "@babel/runtime": "^7.13.10",

@@ -9,16 +9,15 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import styled from 'styled-components';
 
 import { Button, Input, Table } from '@polkadot/react-components';
-import { useFavorites, useLoadingDelay, useToggle } from '@polkadot/react-hooks';
+import { useLoadingDelay, useToggle } from '@polkadot/react-hooks';
 import { FormatBalance } from '@polkadot/react-query';
 import { BN_ZERO } from '@polkadot/util';
 
 import CreateModal from '../modals/Create';
 import ImportModal from '../modals/Import';
+import store from '../store';
 import { useTranslation } from '../translate';
 import Organization from './Organization';
-
-import store from "../store";
 
 interface Balances {
   accounts: Record<string, BN>;
@@ -30,16 +29,16 @@ interface Props {
   onStatusChange: (status: ActionStatus) => void;
 }
 
-const STORE_FAVS = 'accounts:favorites';
+// const STORE_FAVS = 'accounts:favorites';
 
 function Overview ({ className = '', onStatusChange }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const [isCreateOpen, toggleCreate] = useToggle();
   const [isImportOpen, toggleImport] = useToggle();
-  const [favorites, toggleFavorite] = useFavorites(STORE_FAVS);
+  // const [favorites, toggleFavorite] = useFavorites(STORE_FAVS);
   const [{ balanceTotal }, setBalances] = useState<Balances>({ accounts: {} });
   const [filterOn, setFilter] = useState<string>('');
-  const [storedOrgs , setSorted] = useState<OrgStored[]>([]);
+  const [storedOrgs, setSorted] = useState<OrgStored[]>([]);
   const isLoading = useLoadingDelay();
 
   const headerRef = useRef([
@@ -55,13 +54,13 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
 
   useEffect((): void => {
     const triggerUpdate = () => {
-      setSorted(store.getAllOrganizations())
+      setSorted(store.getAllOrganizations());
     };
 
     store.loadAll().then(triggerUpdate);
-    
-    store.on('new-org', triggerUpdate)
-    store.on('remove-org', triggerUpdate)
+
+    store.on('new-org', triggerUpdate);
+    store.on('remove-org', triggerUpdate);
   }, [store]);
 
   const _setBalance = useCallback(
@@ -125,18 +124,17 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
         />
       </Button.Group>
       <Table
-        empty={!isLoading && storedOrgs && t<string>("No any organizations registered to your session.")}
+        empty={!isLoading && storedOrgs && t<string>('No any organizations registered to your session.')}
         filter={filter}
         footer={footer}
         header={headerRef.current}
       >
         {!isLoading && storedOrgs?.map((org, index): React.ReactNode => (
           <Organization
-            org={org}
             filter={filterOn}
             key={`${index}:${org.id}`}
+            org={org}
             setBalance={_setBalance}
-            toggleFavorite={toggleFavorite}
           />
         ))}
       </Table>

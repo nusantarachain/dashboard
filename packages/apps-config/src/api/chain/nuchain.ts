@@ -32,11 +32,13 @@ export default {
   },
   CertProof: {
     cert_id: 'CertId',
-    human_id: 'Vec<u8>',
-    recipient: 'Vec<u8>',
+    human_id: 'Text',
+    recipient: 'Text',
     time: 'Moment',
     expired: 'Option<Moment>',
     revoked: 'bool',
+    block: 'BlockNumber',
+    signer_name: 'Option<Text>',
     props: 'Option<Vec<Property>>'
   },
   ProductId: 'Vec<u8>',
