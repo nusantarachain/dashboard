@@ -10,7 +10,9 @@ export default function create (t: TFunction): Route {
   return {
     Component,
     display: {
-      needsApi: []
+      needsApi: [
+        "query.organization.organizations"
+      ]
     },
     group: 'accounts',
     icon: 'users',
