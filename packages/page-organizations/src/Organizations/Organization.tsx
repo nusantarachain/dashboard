@@ -335,16 +335,11 @@ function Organization ({ className = '', filter, isFavorite, org: { description,
           />
         )}
       </td>
-      <td className='address media--1400'>
+      <td className='address'>
         <strong>{name}</strong>
       </td>
       <td className='address'>
         <p>{description}</p>
-      </td>
-      <td className='all'>
-        <div className='tags'>
-          {/* <Tags value={tags} /> */}
-        </div>
       </td>
       <td className='number media--1500'>
         {balancesAll?.accountNonce.gt(BN_ZERO) && formatNumber(balancesAll.accountNonce)}
