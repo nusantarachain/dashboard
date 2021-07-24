@@ -20,6 +20,8 @@ export default {
     website: 'Vec<u8>',
     email: 'Vec<u8>',
     suspended: 'bool',
+    block: 'BlockNumber',
+    timestamp: 'Moment',
     props: 'Option<Vec<Property>>'
   },
   CertId: '[u8; 32]',
