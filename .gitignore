@@ -21,3 +21,4 @@ yarn-error.log*
 env-config.js
 NOTES.md
 .env
+.env-prod
