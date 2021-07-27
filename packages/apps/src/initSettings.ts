@@ -43,12 +43,14 @@ function getApiUrl (): string {
   const fallbackUrl = endpoints.find(({ value }) => !!value);
 
   // via settings, or the default chain
+  console.log("🚀 ~ file: initSettings.ts ~ line 53 ~ getApiUrl ~ settings.apiUrl", settings.apiUrl)
   return [stored.apiUrl, process.env.WS_URL].includes(settings.apiUrl)
     ? settings.apiUrl // keep as-is
     : fallbackUrl
       ? fallbackUrl.value as string // grab the fallback
       : 'ws://127.0.0.1:9944'; // nothing found, go local
 }
+  
 
 const apiUrl = getApiUrl();
 

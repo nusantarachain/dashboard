@@ -4,14 +4,14 @@
 import type { TFunction } from 'i18next';
 import type { LinkOption } from '../settings/types';
 
-import { createCustom, createDev, createOwn } from './development';
+import { createDev, createOwn } from './development';
 import { createProduction } from './production';
 
 export { CUSTOM_ENDPOINT_KEY } from './development';
 
 export function createWsEndpoints (t: TFunction): LinkOption[] {
   return [
-    ...createCustom(t),
+    // ...createCustom(t),
     {
       isDisabled: false,
       isHeader: true,
