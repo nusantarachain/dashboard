@@ -21,7 +21,8 @@ export function createProduction (t: TFunction): LinkOption[] {
       info: 'nuchain',
       text: t('rpc.nuchain', 'Nuchain', { ns: 'apps-config' }),
       providers: {
-        'Rantai Nusantara': 'wss://node-sg.nuchain.riset.tech'
+        'Rantai Nusantara (SG)': 'wss://sg.node.nuchain.network',
+        'Rantai Nusantara (ID)': 'wss://id.node.nuchain.network'
       }
     },
     {

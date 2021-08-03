@@ -2820,7 +2820,7 @@ __metadata:
 
 "@polkadot/react-qr@file:../react-qr::locator=%40polkadot%2Freact-components%40workspace%3Apackages%2Freact-components":
   version: 0.77.2-0
-  resolution: "@polkadot/react-qr@file:../react-qr#../react-qr::hash=f24fb2&locator=%40polkadot%2Freact-components%40workspace%3Apackages%2Freact-components"
+  resolution: "@polkadot/react-qr@file:../react-qr#../react-qr::hash=6d6fac&locator=%40polkadot%2Freact-components%40workspace%3Apackages%2Freact-components"
   dependencies:
     "@babel/runtime": ^7.14.0
     "@polkadot/util": ^6.5.2-0
@@ -2834,7 +2834,7 @@ __metadata:
     react: "*"
     react-dom: "*"
     styled-components: "*"
-  checksum: 965722f720ee2ca85dc85175b52a4f988aa706b40d0fefbda22e529495a1f93f83109674882be39ac3054c6d497dfb5240e0a6dd8323ed5caa7e091c76b1814a
+  checksum: 2c731ac88de4f4ab007ce41c9c7ba46cfcad5744d96523fcc07d89352b395fbaa46b97b287377993ef3ed691f3e2fd1f1e16b8f10769096d46d9bfa92f0e7c97
   languageName: node
   linkType: hard
 
