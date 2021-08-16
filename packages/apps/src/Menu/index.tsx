@@ -30,7 +30,7 @@ const disabledLog = new Map<string, string>();
 function createExternals (t: TFunction): ItemRoute[] {
   return [
     { href: 'https://github.com/nusantarachain/dashboard', icon: 'code-branch', name: 'github', text: t<string>('nav.github', 'GitHub', { ns: 'apps-routing' }) },
-    { href: 'https://wiki.nuchain.network', icon: 'book', name: 'wiki', text: t<string>('nav.wiki', 'Wiki', { ns: 'apps-routing' }) }
+    { href: 'https://nuchain.network/docs/general/welcome', icon: 'book', name: 'wiki', text: t<string>('nav.wiki', 'Wiki', { ns: 'apps-routing' }) }
   ];
 }
 
