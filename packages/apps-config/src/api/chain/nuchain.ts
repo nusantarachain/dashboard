@@ -89,5 +89,20 @@ export default {
     reading_type: 'ReadingType',
     timestamp: 'Moment',
     value: 'Decimal'
+  },
+  Attribute: {
+    name: 'Text',
+    value: 'Text',
+    validity: 'BlockNumber',
+    creation: 'Moment',
+    nonce: 'u64'
+  },
+  AttributeTransaction: {
+    signature: 'Signature',
+    name: 'Text',
+    value: 'Text',
+    validity: 'u32',
+    signer: 'AccountId',
+    identity: 'AccountId'
   }
 };
